@@ -28,12 +28,12 @@ jobs:
 
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/compiler-project:${{ github.sha }} -t ${{ secrets.DOCKERHUB_USERNAME }}/compiler-project:latest .
+        run: docker build -t shubhamisntreal/compiler-project:${{ github.sha }} -t shubhamisntreal/compiler-project:latest .
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/compiler-project:${{ github.sha }}'
+          image-ref: 'shubhamisntreal/compiler-project:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
@@ -44,11 +44,11 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: shubhamisntreal
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push image to Docker Hub
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/compiler-project:${{ github.sha }}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/compiler-project:latest
+          docker push shubhamisntreal/compiler-project:${{ github.sha }}
+          docker push shubhamisntreal/compiler-project:latest
