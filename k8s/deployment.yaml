@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compiler-project
+  labels:
+    app: compiler-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: compiler-project
+  template:
+    metadata:
+      labels:
+        app: compiler-project
+    spec:
+      containers:
+      - name: compiler-project
+        image: shubhamisntreal/compiler-project:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8501

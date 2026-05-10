@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: compiler-project-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: compiler-project
+  ports:
+    - protocol: TCP
+      port: 8501
+      targetPort: 8501
+      nodePort: 30501
