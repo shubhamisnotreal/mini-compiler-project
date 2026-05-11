@@ -162,9 +162,10 @@ with tab_tree:
             elif node["type"] == "recursion":
                 st.error(f"🛑 {node['text']}")
             elif node["type"] == "macro":
-                with st.expander(f"▶ Expand Macro: {node['name']}({node['args']})", expanded=False):
-                    
-                    st.markdown("#### 💡 What's happening here?")
+                is_expanded = st.checkbox(f"▶ Expand Macro: {node['name']}({node['args']})", key=f"expand_{current_path}")
+                if is_expanded:
+                    with st.container():
+                        st.markdown("#### 💡 What's happening here?")
                     # Human Language Narrator
                     params = node['args'] if node['args'] else "None"
                     num_instructions = len(node['substitution'])
