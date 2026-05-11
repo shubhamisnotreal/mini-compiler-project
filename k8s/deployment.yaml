@@ -17,6 +17,6 @@ spec:
       containers:
       - name: compiler-project
         image: shubhamisntreal/compiler-project:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8501
